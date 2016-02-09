@@ -1,3 +1,7 @@
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 alias diff="colordiff -u"
 alias l="ls"
 alias ls="ls --color=auto -F"
