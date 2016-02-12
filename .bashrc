@@ -68,6 +68,11 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+if [ -d ~/.bash-git-prompt ]; then
+    GIT_PROMPT_THEME=Custom
+    . ~/.bash-git-prompt/gitprompt.sh
+fi
+
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi

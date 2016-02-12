@@ -9,6 +9,8 @@ function link_file {
 link_file .profile
 link_file .bashrc
 link_file .aliases
+link_file .git-prompt-colors.sh
+ln -si "$basedir"/bash-git-prompt ~/.bash-git-prompt
 
 ${basedir}/setup-gitconfig.sh
 
