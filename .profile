@@ -18,7 +18,7 @@ if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
 
-if [ -f .profile.local ]; then
-    . .profile.local
+if [ -f $HOME/.profile.local ]; then
+    . $HOME/.profile.local
 fi
 
