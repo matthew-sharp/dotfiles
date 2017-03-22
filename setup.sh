@@ -13,6 +13,7 @@ link_file .profile
 link_file .bashrc
 link_file .aliases
 link_file .git-prompt-colors.sh
+link_file .vim
 link_file .bash-git-prompt
 
 ${basedir}/setup-gitconfig.sh
