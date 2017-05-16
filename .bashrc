@@ -26,7 +26,7 @@ shopt -s checkwinsize
 shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x /usr/bin/lesspipe ] && lesspipe | grep -q 'export' && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
