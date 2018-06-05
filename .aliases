@@ -12,6 +12,7 @@ alias lal="ls -al"
 alias t="tree -C"
 alias md="mkdir -p"
 alias grep="grep --exclude-dir=.git"
+alias rtw='sed --in-place '"'"'s/[[:space:]]\+$//'"'"''
 
 alias g="git"
 alias gst="git status"
