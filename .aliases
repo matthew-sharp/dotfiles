@@ -5,7 +5,11 @@ alias .....="cd ../../../.."
 
 alias diff="colordiff -u"
 alias l="ls"
-alias ls="ls --color=auto -F"
+if ls --color=auto >/dev/null 2>&1 ; then
+    alias ls="ls --color=auto -F"
+else
+    alias ls="ls -GF"
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias lal="ls -al"
