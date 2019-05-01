@@ -88,6 +88,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if [ -f /usr/local/etc/autojump.sh ]; then
+    . /usr/local/etc/autojump.sh
+fi
+
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
