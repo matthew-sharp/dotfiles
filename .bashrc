@@ -88,6 +88,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if [ -r /usr/share/autojump/autojump.bash ]; then
+    . /usr/share/autojump/autojump.bash
+fi
+
 if [ -f /usr/local/etc/autojump.sh ]; then
     . /usr/local/etc/autojump.sh
 fi
