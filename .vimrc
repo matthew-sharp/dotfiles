@@ -12,7 +12,6 @@ set expandtab
 set autoindent
 set backspace=indent,eol,start
 set display=lastline,uhex
-set fillchars=vert:│,fold:·
 set formatoptions=tcqj
 set hlsearch
 set incsearch
