@@ -96,7 +96,9 @@ if [ -f /usr/local/etc/autojump.sh ]; then
     . /usr/local/etc/autojump.sh
 fi
 
-eval "$(zoxide init bash)"
+if type zoxide 2>/dev/null; then
+    eval "$(zoxide init bash)"
+fi
 
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
