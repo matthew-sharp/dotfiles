@@ -100,6 +100,8 @@ if type zoxide 2>/dev/null; then
     eval "$(zoxide init bash)"
 fi
 
+umask 027
+
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
