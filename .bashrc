@@ -93,6 +93,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# complete the git aliases from ~/.aliases like the git subcommands they wrap
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    . /usr/share/bash-completion/completions/git
+fi
+
+if declare -F __git_complete >/dev/null; then
+    __git_complete g __git_main
+    __git_complete gst _git_status
+    __git_complete gd _git_diff
+    __git_complete gsta _git_stash
+    __git_complete gc _git_commit
+    __git_complete gca _git_commit
+    __git_complete gc! _git_commit
+    __git_complete gca! _git_commit
+    __git_complete ga _git_add
+    __git_complete gco _git_checkout
+    __git_complete gr _git_reset
+    __git_complete gp _git_push
+    __git_complete gpsu _git_push
+    __git_complete gf _git_fetch
+    __git_complete gl _git_pull
+    __git_complete grb _git_rebase
+fi
+
 if [ -r /usr/share/autojump/autojump.bash ]; then
     . /usr/share/autojump/autojump.bash
 fi
