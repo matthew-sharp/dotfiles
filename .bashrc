@@ -76,6 +76,12 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+if ls --color=auto >/dev/null 2>&1 ; then
+    alias ls="ls --color=auto -F"
+else
+    alias ls="ls -GF"
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).

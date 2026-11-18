@@ -5,7 +5,8 @@ basedir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function link_file {
     local file=$1
     if [[ ! -L ~/"${file}" ]]; then
-	ln -si "$basedir/${file}" ~
+	mkdir -p ~/"$(dirname "${file}")"
+	ln -si "$basedir/${file}" ~/"$(dirname "${file}")"
     fi
 }
 
@@ -14,11 +15,8 @@ link_file .bashrc
 link_file .aliases
 link_file .vim
 link_file .vimrc
-
-mkdir -p ~/.config
-if [[ ! -L ~/.config/starship.toml ]]; then
-    ln -si "$basedir/.config/starship.toml" ~/.config
-fi
+link_file .config/starship.toml
+link_file .config/fish/conf.d/aliases.fish
 
 ${basedir}/setup-gitconfig.sh
 
