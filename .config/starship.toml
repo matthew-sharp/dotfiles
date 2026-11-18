@@ -1,8 +1,14 @@
 # Approximates the old bash-git-prompt "Single_line" theme:
-# ✔ ~/path on branch [status] $
-# ✘-1 ~/path $
+# ✔ user ~/path on branch [status] $
+# ✘-1 user ~/path $
 add_newline = false
-format = '$character$status $directory$git_branch$git_state$git_status\$ '
+format = '$character$status $username$directory$git_branch$git_state$git_status\$ '
+
+[username]
+show_always = true
+format = '[$user]($style) '
+style_user = 'bold blue'
+style_root = 'bold red'
 
 [character]
 format = '$symbol'
