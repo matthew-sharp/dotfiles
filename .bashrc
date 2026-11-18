@@ -68,9 +68,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-if [ -f ~/.bash-git-prompt/gitprompt.sh ]; then
-    GIT_PROMPT_THEME=Custom
-    . ~/.bash-git-prompt/gitprompt.sh
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
 fi
 
 if [ -f ~/.aliases ]; then

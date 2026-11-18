@@ -1,0 +1,20 @@
+# Approximates the old bash-git-prompt "Single_line" theme:
+# ✔ ~/path on branch [status] $
+# ✘-1 ~/path $
+add_newline = false
+format = '$character$status $directory$git_branch$git_state$git_status\$ '
+
+[character]
+format = '$symbol'
+success_symbol = '[✔](bold green)'
+error_symbol = '[✘](bold red)'
+
+[status]
+disabled = false
+format = '[-$status]($style)'
+style = 'bold red'
+
+[directory]
+style = 'bold green'
+truncation_length = 100
+truncate_to_repo = false

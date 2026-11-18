@@ -12,10 +12,13 @@ function link_file {
 link_file .profile
 link_file .bashrc
 link_file .aliases
-link_file .git-prompt-colors.sh
 link_file .vim
 link_file .vimrc
-link_file .bash-git-prompt
+
+mkdir -p ~/.config
+if [[ ! -L ~/.config/starship.toml ]]; then
+    ln -si "$basedir/.config/starship.toml" ~/.config
+fi
 
 ${basedir}/setup-gitconfig.sh
 
