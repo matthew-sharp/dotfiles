@@ -17,6 +17,7 @@ link_file .vim
 link_file .vimrc
 link_file .config/starship.toml
 link_file .config/fish/conf.d/aliases.fish
+link_file .config/fish/conf.d/starship.fish
 
 ${basedir}/setup-gitconfig.sh
 
