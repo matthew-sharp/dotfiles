@@ -2,7 +2,7 @@
 # ✔ user ~/path on branch [status] $
 # ✘-1 user ~/path $
 add_newline = false
-format = '$character$status $username$directory$git_branch$git_state$git_status\$ '
+format = '$character$status $username$directory$git_branch$git_state$git_status$cmd_duration\$ '
 
 [username]
 show_always = true
@@ -24,3 +24,8 @@ style = 'bold red'
 style = 'bold green'
 truncation_length = 100
 truncate_to_repo = false
+
+[cmd_duration]
+min_time = 3_000                  # milliseconds
+format = '[took $duration]($style) '
+style = 'yellow'
