@@ -12,6 +12,3 @@ if test -f ~/.aliases
     functions --copy __real_alias alias
     functions --erase __real_alias
 end
-
-# fish's ls wrapper already adds colour
-alias ls 'ls -F'
