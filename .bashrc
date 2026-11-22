@@ -69,6 +69,10 @@ alias la='ls -A'
 alias l='ls -CF'
 
 if command -v starship >/dev/null 2>&1; then
+    # a per-machine config wins, like ~/.bashrc.local
+    if [ -f ~/.config/starship.local.toml ]; then
+        export STARSHIP_CONFIG=~/.config/starship.local.toml
+    fi
     eval "$(starship init bash)"
 fi
 
@@ -136,7 +140,8 @@ if [ -f ~/.bashrc.local ]; then
 fi
 
 # hand interactive terminals to fish; leave bash -c, scripts and nested shells alone
-if [[ $(ps -o comm= -p $PPID) != fish && -z $BASH_EXECUTION_STRING && $SHLVL == 1 ]] \
+# (set no_fish=1 in ~/.bashrc.local to stay in bash)
+if [[ -z $no_fish && $(ps -o comm= -p $PPID) != fish && -z $BASH_EXECUTION_STRING && $SHLVL == 1 ]] \
         && command -v fish >/dev/null; then
     shopt -q login_shell && exec fish --login || exec fish
 fi
