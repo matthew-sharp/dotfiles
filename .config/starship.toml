@@ -23,7 +23,7 @@ aws = '#ff9900'
 
 [character]
 format = '$symbol'
-success_symbol = '[ ✔ ](bg:ok fg:text)'
+success_symbol = '[ ✔  ](bg:ok fg:text)'
 error_symbol = '[ ✘](bg:err fg:text)'
 
 [status]
