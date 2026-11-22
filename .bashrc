@@ -135,3 +135,8 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
+# hand interactive terminals to fish; leave bash -c, scripts and nested shells alone
+if [[ $(ps -o comm= -p $PPID) != fish && -z $BASH_EXECUTION_STRING && $SHLVL == 1 ]] \
+        && command -v fish >/dev/null; then
+    shopt -q login_shell && exec fish --login || exec fish
+fi
