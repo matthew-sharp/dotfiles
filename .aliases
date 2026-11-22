@@ -34,3 +34,6 @@ alias grb="git rebase"
 alias grbc="git rebase --continue"
 alias grba="git rebase --abort"
 
+alias flatseal="flatpak run com.github.tchx84.Flatseal"
+alias steam="flatpak run com.valvesoftware.Steam"
+alias hgl="flatpak run com.heroicgameslauncher.hgl"
