@@ -141,7 +141,7 @@ if [ -f /usr/local/etc/autojump.sh ]; then
     . /usr/local/etc/autojump.sh
 fi
 
-if type zoxide 2>/dev/null; then
+if command -v zoxide >/dev/null; then
     eval "$(zoxide init bash)"
 fi
 
@@ -154,8 +154,14 @@ fi
 # hand interactive terminals to fish; leave bash -c, scripts and shells started
 # from another shell alone, but not tmux/screen panes (SHLVL is >1 there)
 # (set no_fish=1 in ~/.bashrc.local, or e.g. `no_fish=1 bash`, to stay in bash)
-if [[ -z $no_fish && -z $BASH_EXECUTION_STRING ]] \
-        && [[ ! $(ps -o comm= -p $PPID) =~ ^(fish|bash|sh|zsh)$ ]] \
+# (stay in bash if the parent can't be identified, e.g. no /proc and no ps)
+parent_comm=
+read -r parent_comm 2>/dev/null </proc/$PPID/comm \
+    || parent_comm=$(ps -o comm= -p $PPID 2>/dev/null)
+if [[ -z $no_fish && -z $BASH_EXECUTION_STRING && -n $parent_comm ]] \
+        && [[ ! $parent_comm =~ ^(fish|bash|sh|zsh)$ ]] \
         && command -v fish >/dev/null; then
+    unset parent_comm
     shopt -q login_shell && exec fish --login || exec fish
 fi
+unset parent_comm
