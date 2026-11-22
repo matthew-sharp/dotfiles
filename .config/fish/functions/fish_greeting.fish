@@ -50,10 +50,10 @@ function fish_greeting
         end
     end
 
-    # local filesystems at 90% or more, each device once (btrfs subvolumes share one)
-    set -l full (df -l --output=source,fstype,pcent,target 2>/dev/null \
-        | awk 'NR > 1 && $2 !~ /^(devtmpfs|efivarfs)$/ && $4 !~ "^/(run|dev)(/|$)" && !seen[$1]++ \
-            && $3 + 0 >= 90 { print $4 " " $3 }')
+    # disk-backed filesystems at 90% or more, each device once (btrfs subvolumes share one)
+    set -l types btrfs ext2 ext3 ext4 xfs f2fs bcachefs zfs vfat exfat ntfs3 fuseblk
+    set -l full (df -l -t$types --output=source,pcent,target 2>/dev/null \
+        | awk 'NR > 1 && !seen[$1]++ && $2 + 0 >= 90 { print $3 " " $2 }')
     if set -q full[1]
         set_color yellow
         echo "Nearly full: "(string join ', ' $full)
