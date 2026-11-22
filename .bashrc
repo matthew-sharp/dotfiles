@@ -151,9 +151,11 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-# hand interactive terminals to fish; leave bash -c, scripts and nested shells alone
-# (set no_fish=1 in ~/.bashrc.local to stay in bash)
-if [[ -z $no_fish && $(ps -o comm= -p $PPID) != fish && -z $BASH_EXECUTION_STRING && $SHLVL == 1 ]] \
+# hand interactive terminals to fish; leave bash -c, scripts and shells started
+# from another shell alone, but not tmux/screen panes (SHLVL is >1 there)
+# (set no_fish=1 in ~/.bashrc.local, or e.g. `no_fish=1 bash`, to stay in bash)
+if [[ -z $no_fish && -z $BASH_EXECUTION_STRING ]] \
+        && [[ ! $(ps -o comm= -p $PPID) =~ ^(fish|bash|sh|zsh)$ ]] \
         && command -v fish >/dev/null; then
     shopt -q login_shell && exec fish --login || exec fish
 fi
