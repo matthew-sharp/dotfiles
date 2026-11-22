@@ -1,9 +1,11 @@
 if test -f ~/.aliases
     # source ~/.aliases with alias also adding a matching abbr, so they
-    # expand on space; the aliases stay too, since abbrs don't nest (gca -> gc -a)
+    # expand on space; the aliases stay too, since abbrs don't nest (gca -> gc -a).
+    # Aliases whose command isn't available on this machine are skipped.
     functions --copy alias __real_alias
     function alias
         set -l kv (string split -m 1 = -- $argv[1])
+        type -q (string split -f 1 ' ' -- $kv[2]); or return 0
         abbr --add -- $kv[1] $kv[2]
         __real_alias $argv
     end

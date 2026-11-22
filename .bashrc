@@ -77,7 +77,19 @@ if command -v starship >/dev/null 2>&1; then
 fi
 
 if [ -f ~/.aliases ]; then
+    # skip aliases whose command isn't available on this machine
+    alias() {
+        local arg value
+        for arg; do
+            if [[ $arg == *=* ]]; then
+                value=${arg#*=}
+                command -v "${value%% *}" >/dev/null || continue
+            fi
+            builtin alias "$arg"
+        done
+    }
     . ~/.aliases
+    unset -f alias
 fi
 
 if ls --color=auto >/dev/null 2>&1 ; then
