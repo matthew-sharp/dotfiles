@@ -19,6 +19,7 @@ link_file .config/starship.toml
 link_file .config/fish/conf.d/aliases.fish
 link_file .config/fish/conf.d/starship.fish
 link_file .config/fish/conf.d/jump.fish
+link_file .config/fish/functions/fish_greeting.fish
 
 ${basedir}/setup-gitconfig.sh
 
