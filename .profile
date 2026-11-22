@@ -5,15 +5,6 @@
 # the default umask is set in /etc/profile; for setting the umask
 umask 027
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
-
 if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
@@ -25,5 +16,14 @@ fi
 
 if [ -f $HOME/.profile.local ]; then
     . $HOME/.profile.local
+fi
+
+# keep this last: .bashrc may exec fish, and nothing after it would run
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
 fi
 
