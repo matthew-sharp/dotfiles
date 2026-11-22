@@ -1,31 +1,105 @@
-# Approximates the old bash-git-prompt "Single_line" theme:
-# ✔ user ~/path on branch [status] $
-# ✘-1 user ~/path $
+# Two-line prompt of coloured blocks:
+#   ✔ / ✘-1 · user · path · git · languages · gcloud/azure/aws · duration
+#   $
+# Modules with nothing to say print nothing, so there are no empty blocks
+# (the no-empty-icons idea). Icons need a Nerd Font in the terminal.
+"$schema" = 'https://starship.rs/config-schema.json'
 add_newline = false
-format = '$character$status $username$directory$git_branch$git_state$git_status$cmd_duration\$ '
+format = '$character$status$username$directory$git_branch$git_state$git_status$python$nodejs$golang$rust$java$terraform$gcloud$azure$aws$cmd_duration $line_break\$ '
+palette = 'segments'
 
-[username]
-show_always = true
-format = '[$user]($style) '
-style_user = 'bold blue'
-style_root = 'bold red'
+[palettes.segments]
+text = '#1d2021'
+ok = '#98971a'
+err = '#cc241d'
+user = '#458588'
+dir = '#689d6a'
+git = '#b16286'
+lang = '#a89984'
+dur = '#d79921'
+gcp = '#4285f4'
+azure = '#0089d6'
+aws = '#ff9900'
 
 [character]
 format = '$symbol'
-success_symbol = '[✔](bold green)'
-error_symbol = '[✘](bold red)'
+success_symbol = '[ ✔ ](bg:ok fg:text)'
+error_symbol = '[ ✘](bg:err fg:text)'
 
 [status]
 disabled = false
-format = '[-$status]($style)'
-style = 'bold red'
+format = '[-$status ](bg:err fg:text)'
+
+[username]
+show_always = true
+format = '[ $user ]($style inverted)'
+style_user = 'fg:user'
+style_root = 'fg:err'
 
 [directory]
-style = 'bold green'
+format = '[ $path](bg:dir fg:text)[$read_only](bg:dir fg:text)[ ](bg:dir)'
+read_only = ' 󰌾'
 truncation_length = 100
 truncate_to_repo = false
 
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ](bg:git fg:text)'
+symbol = ' '
+
+[git_state]
+format = '[ $state( $progress_current/$progress_total) ](bg:git fg:text)'
+
+[git_status]
+format = '([$all_status$ahead_behind ](bg:git fg:text))'
+# counts after each symbol, like bash-git-prompt
+conflicted = '=${count}'
+stashed = '\$${count}'
+deleted = '✘${count}'
+renamed = '»${count}'
+modified = '!${count}'
+staged = '+${count}'
+untracked = '?${count}'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇡${ahead_count}⇣${behind_count}'
+
+[python]
+format = '[ $symbol$version( \($virtualenv\)) ](bg:lang fg:text)'
+symbol = ' '
+
+[nodejs]
+format = '[ $symbol$version ](bg:lang fg:text)'
+symbol = ' '
+
+[golang]
+format = '[ $symbol$version ](bg:lang fg:text)'
+symbol = ' '
+
+[rust]
+format = '[ $symbol$version ](bg:lang fg:text)'
+symbol = '󱘗 '
+
+[java]
+format = '[ $symbol$version ](bg:lang fg:text)'
+symbol = ' '
+
+[terraform]
+format = '[ $symbol$workspace ](bg:lang fg:text)'
+symbol = ' '
+
+[gcloud]
+format = '[ $symbol$project( \($region\)) ](bg:gcp fg:white)'
+symbol = '󱇶 '
+
+[azure]
+disabled = false
+format = '[ $symbol$subscription ](bg:azure fg:white)'
+symbol = ' '
+
+[aws]
+format = '[ $symbol($profile)( \($region\))( \[$duration\]) ](bg:aws fg:text)'
+symbol = ' '
+
 [cmd_duration]
 min_time = 3_000                  # milliseconds
-format = '[took $duration]($style) '
-style = 'yellow'
+format = '[ took $duration ](bg:dur fg:text)'
