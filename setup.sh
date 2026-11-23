@@ -36,6 +36,7 @@ check_command starship "plain default prompt"
 if ! command -v zoxide >/dev/null && ! command -v autojump >/dev/null; then
     missing+=("zoxide (or autojump): no directory jumping")
 fi
+check_command eza "l/ll/la/lal/t use plain ls and tree"
 check_command hx "git uses its default editor (rerun setup-gitconfig.sh once installed)"
 if [[ ! -f /usr/share/bash-completion/bash_completion && ! -f /etc/bash_completion ]]; then
     missing+=("bash-completion: only basic tab completion in bash")

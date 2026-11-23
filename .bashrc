@@ -57,16 +57,17 @@ unset color_prompt force_color_prompt
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# before ~/.aliases, so its l/ll/la (eza where installed) build on this
+if ls --color=auto >/dev/null 2>&1 ; then
+    alias ls="ls --color=auto -F"
+else
+    alias ls="ls -GF"
+fi
 
 if command -v starship >/dev/null 2>&1; then
     # a per-machine config wins, like ~/.bashrc.local
@@ -90,12 +91,6 @@ if [ -f ~/.aliases ]; then
     }
     . ~/.aliases
     unset -f alias
-fi
-
-if ls --color=auto >/dev/null 2>&1 ; then
-    alias ls="ls --color=auto -F"
-else
-    alias ls="ls -GF"
 fi
 
 # enable programmable completion features (you don't need to enable
