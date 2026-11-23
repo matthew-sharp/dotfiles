@@ -88,7 +88,7 @@ format = '[ $symbol$workspace ](bg:lang fg:text)'
 symbol = ' '
 
 [gcloud]
-format = '[ $symbol$project( \($region\)) ](bg:gcp fg:white)'
+format = '[ $symbol$active ($project) $account ](bg:gcp fg:white)'
 symbol = '󱇶 '
 
 [azure]
