@@ -90,6 +90,8 @@ if [ -f ~/.aliases ]; then
         done
     }
     . ~/.aliases
+    # per-machine aliases, kept out of the repo like ~/.bashrc.local
+    [ -f ~/.aliases.local ] && . ~/.aliases.local
     unset -f alias
 fi
 

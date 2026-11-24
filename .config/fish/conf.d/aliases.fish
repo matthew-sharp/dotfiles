@@ -10,6 +10,8 @@ if test -f ~/.aliases
         __real_alias $argv
     end
     source ~/.aliases
+    # per-machine aliases, kept out of the repo like ~/.bashrc.local
+    test -f ~/.aliases.local; and source ~/.aliases.local
     functions --erase alias
     functions --copy __real_alias alias
     functions --erase __real_alias
