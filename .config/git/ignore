@@ -1,0 +1,11 @@
+# Global gitignore, linked to ~/.config/git/ignore by setup.sh
+# editor and OS clutter
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
+.netrwhist
+
+# per-checkout Claude Code notes
+CLAUDE.local.md

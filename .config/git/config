@@ -1,0 +1,45 @@
+# Shared git config, linked to ~/.config/git/config by setup.sh.
+# Identity and credential helpers stay in ~/.gitconfig, per-machine settings
+# go in ~/.config/git/config.local (included last, so it wins over this file).
+# ~/.gitconfig is read after this file and overrides it too, so keep it to
+# identity and credentials.
+
+[push]
+	# push to the branch of the same name, and create it on the remote the
+	# first time; never to a differently named upstream
+	default = simple
+	autoSetupRemote = true
+
+[branch]
+	# only track a remote branch when the names match, so branches started
+	# from origin/master get their own upstream on first push
+	autoSetupMerge = simple
+	sort = -committerdate
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+	updateRefs = true
+
+[commit]
+	verbose = true
+
+[diff]
+	algorithm = histogram
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true
+
+[column]
+	ui = auto
+
+[help]
+	autocorrect = prompt
+
+[include]
+	path = ~/.config/git/config.local

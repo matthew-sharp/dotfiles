@@ -14,6 +14,10 @@ if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
 
+if command -v hx >/dev/null 2>&1; then
+    export EDITOR=hx VISUAL=hx
+fi
+
 if [ -f $HOME/.profile.local ]; then
     . $HOME/.profile.local
 fi
