@@ -1,3 +1,7 @@
+" Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+" There is no per-machine file; only edit here for changes all machines should
+" get.
+
 syntax on
 filetype plugin indent on
 

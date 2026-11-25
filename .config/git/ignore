@@ -1,4 +1,7 @@
-# Global gitignore, linked to ~/.config/git/ignore by setup.sh
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# Global gitignore. There is no per-machine file (for one repo only, use its
+# .git/info/exclude); only edit here for patterns all machines should get.
+
 # editor and OS clutter
 *.swp
 *.swo

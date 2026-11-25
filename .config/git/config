@@ -1,6 +1,7 @@
-# Shared git config, linked to ~/.config/git/config by setup.sh.
-# Identity and credential helpers stay in ~/.gitconfig, per-machine settings
-# go in ~/.config/git/config.local (included last, so it wins over this file).
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# Per-machine settings go in ~/.config/git/config.local (included last, so it
+# wins over this file); only edit here for changes all machines should get.
+# Identity and credential helpers stay in ~/.gitconfig.
 # ~/.gitconfig is read after this file and overrides it too, so keep it to
 # identity and credentials.
 

@@ -1,3 +1,7 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# Per-machine changes go in ~/.profile.local; only edit here for changes all
+# machines should get.
+
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.

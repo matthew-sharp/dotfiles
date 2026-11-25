@@ -1,3 +1,7 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# Per-machine aliases go in ~/.aliases.local (bash and fish read both); only
+# edit here for aliases all machines should get.
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -16,6 +20,7 @@ alias ll="eza -lF --icons --git --group-directories-first"
 alias la="eza -aF --icons --group-directories-first"
 alias lal="eza -alF --icons --git --group-directories-first"
 alias t="eza -F --icons --tree"
+
 alias md="mkdir -p"
 alias grep="grep --color=auto --exclude-dir=.git"
 alias rtw='sed --in-place '"'"'s/[[:space:]]\+$//'"'"''

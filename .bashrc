@@ -1,3 +1,7 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh (or sourced by a wrapper
+# ~/.bashrc it writes), applies to every machine. Per-machine changes go in
+# ~/.bashrc.local; only edit here for changes all machines should get.
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # If not running interactively, don't do anything

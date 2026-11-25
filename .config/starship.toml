@@ -1,3 +1,8 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# For one machine, copy this to ~/.config/starship.local.toml and edit the copy
+# (it replaces this file there); only edit here for changes all machines
+# should get.
+
 # Two-line prompt of coloured blocks:
 #   ✔ / ✘-1 · user · path · git · languages · gcloud/azure/aws · duration
 #   $

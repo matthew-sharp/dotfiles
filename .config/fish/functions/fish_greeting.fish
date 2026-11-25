@@ -1,3 +1,7 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# There is no per-machine file; only edit here for changes all machines should
+# get.
+
 # user@host · date · uptime · memory, then other login sessions, a pending
 # reboot, nearly full filesystems and failed units.
 # Each part is skipped where its tool isn't available (e.g. macOS).

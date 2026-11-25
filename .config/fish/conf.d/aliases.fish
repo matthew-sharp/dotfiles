@@ -1,3 +1,8 @@
+# Shared dotfile: linked from ~/dotfiles by setup.sh, applies to every machine.
+# The aliases themselves live in ~/.aliases and ~/.aliases.local; for other
+# per-machine setup add an untracked file to ~/.config/fish/conf.d/. Only edit
+# here for changes all machines should get.
+
 if test -f ~/.aliases
     # source ~/.aliases with alias also adding a matching abbr, so they
     # expand on space; the aliases stay too, since abbrs don't nest (gca -> gc -a).
