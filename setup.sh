@@ -10,8 +10,45 @@ function link_file {
     fi
 }
 
+# ~/.bashrc as a real file that sources the repo's copy, for machines that
+# rewrite ~/.bashrc themselves: their lines land in it rather than in the repo
+function wrap_bashrc {
+    local source_line=". \"$basedir/.bashrc\""
+    if [[ -L ~/.bashrc && $(readlink ~/.bashrc) == "$basedir/.bashrc" ]]; then
+        rm ~/.bashrc
+    fi
+    if [[ ! -e ~/.bashrc ]]; then
+        cat > ~/.bashrc <<EOF
+# Something on this machine rewrites ~/.bashrc, so this is a real file rather
+# than a link into dotfiles (written by dotfiles/setup.sh). The shared config
+# is sourced below; anything appended after it belongs to this machine only.
+
+# here as well as in the repo's copy: a return in a sourced file only leaves
+# that file, and appended lines must not run in non-interactive shells
+case \$- in
+    *i*) ;;
+      *) return;;
+esac
+
+$source_line
+EOF
+    elif ! grep -qxF "$source_line" ~/.bashrc; then
+        echo "~/.bashrc is not a wrapper for this repo; to make it one, move it aside and rerun." >&2
+    fi
+}
+
 link_file .profile
-link_file .bashrc
+# Cloud Workstation boot scripts (/etc/workstation-startup.d) append to
+# ~/.bashrc on every boot; DOTFILES_WRAP_BASHRC=1 or 0 overrides the detection
+wrap=${DOTFILES_WRAP_BASHRC-}
+if [[ -z $wrap && -d /etc/workstation-startup.d ]]; then
+    wrap=1
+fi
+if [[ $wrap == 1 ]]; then
+    wrap_bashrc
+else
+    link_file .bashrc
+fi
 link_file .aliases
 link_file .vim
 link_file .vimrc
