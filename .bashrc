@@ -119,9 +119,10 @@ if declare -F __git_complete >/dev/null; then
     __git_complete gca! _git_commit
     __git_complete ga _git_add
     __git_complete gco _git_checkout
+    __git_complete gsw _git_switch
+    __git_complete grs _git_restore
     __git_complete gr _git_reset
     __git_complete gp _git_push
-    __git_complete gpsu _git_push
     __git_complete gf _git_fetch
     __git_complete gl _git_pull
     __git_complete grb _git_rebase
