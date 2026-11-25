@@ -2,8 +2,8 @@
 # Move uncommitted additions to .bashrc and .profile into ~/.bashrc.local and
 # ~/.profile.local, then restore the repo's copy.
 # Installers (conda, nvm, rustup, the gcloud SDK, ...) append to ~/.bashrc and
-# ~/.profile, which are links into this repo, and their lines land after the
-# point where .bashrc execs fish, so they never run there.
+# ~/.profile, which are links into this repo, so their per-machine lines would
+# otherwise end up committed and shared with every machine.
 # -n: only show what would be moved
 
 basedir="$( cd "$( dirname "$0" )" && pwd )"

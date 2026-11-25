@@ -18,7 +18,8 @@ if [ -f $HOME/.profile.local ]; then
     . $HOME/.profile.local
 fi
 
-# keep this last: .bashrc may exec fish, and nothing after it would run
+# keep this last, so .bashrc sees everything set up above (it hands over to fish
+# at the first prompt, after the rest of this file has run)
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists

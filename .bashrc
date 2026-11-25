@@ -152,13 +152,30 @@ fi
 # from another shell alone, but not tmux/screen panes (SHLVL is >1 there)
 # (set no_fish=1 in ~/.bashrc.local, or e.g. `no_fish=1 bash`, to stay in bash)
 # (stay in bash if the parent can't be identified, e.g. no /proc and no ps)
-parent_comm=
-read -r parent_comm 2>/dev/null </proc/$PPID/comm \
-    || parent_comm=$(ps -o comm= -p $PPID 2>/dev/null)
-if [[ -z $no_fish && -z $BASH_EXECUTION_STRING && -n $parent_comm ]] \
-        && [[ ! $parent_comm =~ ^(fish|bash|sh|zsh)$ ]] \
-        && command -v fish >/dev/null; then
-    unset parent_comm
-    shopt -q login_shell && exec fish --login || exec fish
+# The handoff waits for the first prompt so everything after this point runs
+# first and its exports reach fish: lines installers append to ~/.bashrc, and
+# the rest of a wrapper ~/.bashrc that sources this file (see setup.sh).
+__fish_handoff() {
+    local status=$? parent_comm=
+    # one-shot: drop the hook, and leave a no-op for any copy of PROMPT_COMMAND
+    # another tool took (e.g. VS Code shell integration wraps it)
+    PROMPT_COMMAND=${PROMPT_COMMAND//__fish_handoff/}
+    __fish_handoff() { return $?; }
+    read -r parent_comm 2>/dev/null </proc/$PPID/comm \
+        || parent_comm=$(ps -o comm= -p $PPID 2>/dev/null)
+    if [[ -z $no_fish && -n $parent_comm ]] \
+            && [[ ! $parent_comm =~ ^(fish|bash|sh|zsh)$ ]] \
+            && command -v fish >/dev/null; then
+        shopt -q login_shell && exec fish --login || exec fish
+    fi
+    return $status
+}
+# last, so hooks before it (starship, zoxide) still see the command's $?;
+# a newline rather than ';' in case PROMPT_COMMAND already ends in one
+if [[ -z $BASH_EXECUTION_STRING ]]; then
+    if [[ -n $PROMPT_COMMAND ]]; then
+        PROMPT_COMMAND+=$'\n__fish_handoff'
+    else
+        PROMPT_COMMAND=__fish_handoff
+    fi
 fi
-unset parent_comm
