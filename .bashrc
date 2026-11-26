@@ -153,7 +153,8 @@ fi
 # hand interactive terminals to fish; leave bash -c, scripts and shells started
 # from another shell alone, but not tmux/screen panes (SHLVL is >1 there)
 # (set no_fish=1 in ~/.bashrc.local, or e.g. `no_fish=1 bash`, to stay in bash)
-# (stay in bash if the parent can't be identified, e.g. no /proc and no ps)
+# (stay in bash if the parent can't be identified, e.g. no /proc and no ps; a
+# parent hidden by hidepid belongs to another user, so it isn't a shell of ours)
 # The handoff waits for the first prompt so everything after this point runs
 # first and its exports reach fish: lines installers append to ~/.bashrc, and
 # the rest of a wrapper ~/.bashrc that sources this file (see setup.sh).
@@ -163,8 +164,15 @@ __fish_handoff() {
     # another tool took (e.g. VS Code shell integration wraps it)
     PROMPT_COMMAND=${PROMPT_COMMAND//__fish_handoff/}
     __fish_handoff() { return $?; }
-    read -r parent_comm 2>/dev/null </proc/$PPID/comm \
-        || parent_comm=$(ps -o comm= -p $PPID 2>/dev/null)
+    if ! read -r parent_comm 2>/dev/null </proc/$PPID/comm; then
+        if [[ -r /proc/$$/comm ]]; then
+            # /proc works but the parent is hidden (hidepid): another user's
+            # process such as systemd or su, so not a shell of ours
+            parent_comm='(hidden)'
+        else
+            parent_comm=$(ps -o comm= -p $PPID 2>/dev/null)
+        fi
+    fi
     if [[ -z $no_fish && -n $parent_comm ]] \
             && [[ ! $parent_comm =~ ^(fish|bash|sh|zsh)$ ]] \
             && command -v fish >/dev/null; then
