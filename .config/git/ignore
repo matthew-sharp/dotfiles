@@ -8,6 +8,7 @@
 *~
 .DS_Store
 .idea/
+.bsp/
 .netrwhist
 
 # patch and merge leftovers: patch(1) backups and rejects, git mergetool copies
