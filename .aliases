@@ -16,9 +16,9 @@ alias t="tree -C"
 # these replace the ls/tree ones above where eza is installed (skipped otherwise);
 # ls itself stays GNU ls, since eza's short flags differ (e.g. ls -ltr)
 alias l="eza -F --icons --group-directories-first"
-alias ll="eza -lF --icons --git --group-directories-first"
+alias ll="eza -lF --icons --git --group-directories-first -g --smart-group"
 alias la="eza -aF --icons --group-directories-first"
-alias lal="eza -alF --icons --git --group-directories-first"
+alias lal="eza -alF --icons --git --group-directories-first -g --smart-group"
 alias t="eza -F --icons --tree"
 
 alias md="mkdir -p"
